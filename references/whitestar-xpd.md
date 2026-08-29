@@ -8,6 +8,13 @@ Use this reference only when creating or directly modifying a WhiteStarUML file.
 
 Use it only as an emergency aid for understanding XPD nesting or field placement. Never reuse its GUIDs, model/package ownership, class names, operations, attributes, or diagram content in a generated deliverable.
 
+When self-contained validation fails, or when a user reports that WhiteStarUML crashes while loading a generated file, use this reference as a **second-stage diagnostic aid**:
+
+1. Run the self-contained validation first and identify the failing relationship type or invariant.
+2. Inspect only the matching generic structure in the reference file (association, dependency, realization, generalization, sequence participant, or message).
+3. Compare field names, child-view order, and model/view binding locations—not GUID values, coordinates, business names, or model ownership.
+4. Repair the identified invariant in the generated file and rerun the self-contained validation.
+
 ## Safe Workflow
 
 1. Confirm WhiteStarUML has closed the target file before writing.
@@ -194,7 +201,7 @@ This structural check is the required pre-delivery validation. It requires only 
 2. Add classes and diagrams first; then add one complete relationship type at a time.
 3. Run structural validation: XML parse, duplicate GUIDs, unresolved GUID references, all declared collection counts, relation `#Views`, association-end `#Views`, and expected child-label names.
 4. Record the completed XML and self-contained structural checks with the output.
-5. If a user reports a crash, keep a copy of the failing file and run the self-contained relationship validation above. Report the failed invariant: child name, `#Views`/`#Connections` count, unresolved GUID, endpoint, or reverse reference.
+5. If a user reports a crash, keep a copy of the failing file and run the self-contained relationship validation above. If it identifies a failed invariant, consult the matching generic structure in `whitestar-xpd-structural-reference.uml` using the second-stage diagnostic rules above. Report the failed invariant: child name, `#Views`/`#Connections` count, unresolved GUID, endpoint, or reverse reference.
 6. Make repairs idempotent, or explicitly remove duplicate generated labels and references before retesting. Re-running a non-idempotent repair can create duplicate labels while leaving a superficially valid XML file.
 
 ## Generalization
